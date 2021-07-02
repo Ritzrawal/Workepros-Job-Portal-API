@@ -1,0 +1,60 @@
+    image: node:latest
+
+    stages:
+      # - install
+      # - integration_dev_to_stage
+      - deployment_production_to_server
+    cache:
+      paths:
+        - node_modules/
+        
+    #installing_dependencies:
+      #stage: install
+      #script:
+#        - npm install
+      #artifacts:
+        #paths:
+#          - node_modules/
+#    
+    #integration_dev_to_stage:
+      #stage: integration_dev_to_stage
+      #before_script:
+#            - apt-get update -qq
+#            - apt-get install -qq git
+#            - git config --global user.name "Thapa Aacic"
+#            - git config --global user.email "es.aashish.thapa@gmail.com"
+      #script:
+#            - git fetch
+#            - git checkout origin/stage
+#            - git merge origin/dev
+#            - git push http://es.aashish.thapa:JzD2Yzv4dJPqBiurh4EP@gitlab.com/es.aashish.thapa/job-portal-api.git HEAD:stage
+#            - git checkout origin/dev
+#            - git pull origin stage
+#            - git checkout origin/worker
+#            - git pull origin dev
+
+      #only:
+#        - dev
+      #artifacts:
+        #paths:
+#          - node_modules/
+      
+    deployment_production_to_server:
+      stage: deployment_production_to_server
+      before_script:
+            - apt-get update -qq
+            - apt-get install -qq git
+            - 'which ssh-agent || ( apt-get install -qq openssh-client )'
+            - eval $(ssh-agent -s)
+            - echo "$SSH_PRIVATE_KEY"
+            - ssh-add <(echo "$SSH_PRIVATE_KEY")
+            - mkdir -p ~/.ssh
+            - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+      script:
+            - ssh ubuntu@3.140.255.38 "cd /home/projects/job-portal-api/ && git pull origin production && npm i && pm2 restart 1 && exit"
+
+      only:
+        - production
+      artifacts:
+        paths:
+          - node_modules/

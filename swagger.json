@@ -1,0 +1,4801 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Workerpros api",
+    "description": "",
+    "version": "0.1.9"
+  },
+  "paths": {
+    "/api/v1/admin/addAdmin": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Add new admin",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/adminSignUp"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Admin registered successfully"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/sign-in": {
+      "post": {
+        "summary": "user sign in",
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/signIn"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/auth/google/signIn": {
+      "post": {
+        "summary": "user sign in using google info",
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/google(signIn)"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/auth/google/signUp": {
+      "post": {
+        "summary": "user sign Up  using google info",
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/google(signUp)"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/sign-up": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "User sign up",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/signUp"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/logout": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "logout user",
+        "parameters": [
+          {
+            "in": "header",
+            "type": "string",
+            "name": "CLIENT-AUTH",
+            "description": "client authorization token",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/forgot-password": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "forgot password endpoint",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/forgotPassword"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/change-password": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Change password from forgot password end point",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/changePassword"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/change-password-setting": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Change password from setting end point",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/settingChangePassword"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/view-profile/{user_id}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "type": "string",
+            "name": "user_id",
+            "description": "user id",
+            "required": true
+          }
+        ],
+        "summary": "view others profile from this end point",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/categories": {
+      "get": {
+        "tags": [
+          "User and Category"
+        ],
+        "summary": "Categories list end point",
+        "parameters": [
+          {
+            "in": "header",
+            "type": "string",
+            "name": "CLIENT-AUTH",
+            "description": "client authorization token",
+            "required": true
+          },
+          {
+            "in": "query",
+            "type": "integer",
+            "name": "page",
+            "description": "page number to get",
+            "required": false
+          },
+          {
+            "in": "query",
+            "type": "integer",
+            "name": "limit",
+            "description": "limit for data in the a page",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/create-category": {
+      "post": {
+        "tags": [
+          "User and Category"
+        ],
+        "summary": "create a category end point",
+        "parameters": [
+          {
+            "in": "header",
+            "type": "string",
+            "name": "CLIENT-AUTH",
+            "description": "client authorization token",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/category"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/category/{category_id}/skills": {
+      "get": {
+        "tags": [
+          "User and Category"
+        ],
+        "summary": "get list of skills for category",
+        "parameters": [
+          {
+            "in": "header",
+            "type": "string",
+            "name": "CLIENT-AUTH",
+            "description": "client authorization token",
+            "required": true
+          },
+          {
+            "in": "path",
+            "type": "string",
+            "name": "category_id",
+            "description": "category id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/jobs": {
+      "get": {
+        "tags": [
+          "User and Job"
+        ],
+        "summary": "Jobs list end point",
+        "parameters": [
+          {
+            "in": "header",
+            "type": "string",
+            "name": "CLIENT-AUTH",
+            "description": "client authorization token",
+            "required": true
+          },
+          {
+            "in": "query",
+            "type": "integer",
+            "name": "page",
+            "description": "page number to get",
+            "required": false
+          },
+          {
+            "in": "query",
+            "type": "integer",
+            "name": "limit",
+            "description": "limit for data in the a page",
+            "required": false
+          },
+          {
+            "in": "query",
+            "type": "object",
+            "name": "filters",
+            "description": "filters for data in the a page",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "example": {
+              "locations": [
+                "string"
+              ],
+              "category": {
+                "title": "string",
+                "skills": [
+                  "string"
+                ]
+              },
+              "travel_will": "integer",
+              "search": "string",
+              "pay_rate": {
+                "min": 1,
+                "max": 5
+              },
+              "skill_level": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/jobs/{job_id}": {
+      "get": {
+        "tags": [
+          "User and Job"
+        ],
+        "summary": "Job detail end point",
+        "parameters": [
+          {
+            "in": "header",
+            "type": "string",
+            "name": "CLIENT-AUTH",
+            "description": "client authorization token",
+            "required": true
+          },
+          {
+            "in": "path",
+            "type": "string",
+            "name": "job_id",
+            "description": "job_id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/companies": {
+      "get": {
+        "tags": [
+          "User and Company"
+        ],
+        "summary": "Companies list end point",
+        "parameters": [
+          {
+            "in": "header",
+            "type": "string",
+            "name": "CLIENT-AUTH",
+            "description": "client authorization token",
+            "required": true
+          },
+          {
+            "in": "query",
+            "type": "integer",
+            "name": "page",
+            "description": "page number to get",
+            "required": false
+          },
+          {
+            "in": "query",
+            "type": "integer",
+            "name": "limit",
+            "description": "limit for data in the a page",
+            "required": false
+          },
+          {
+            "in": "query",
+            "type": "integer",
+            "name": "get_type",
+            "description": "get_type top or all companies",
+            "required": false
+          },
+          {
+            "in": "query",
+            "type": "object",
+            "name": "filters",
+            "description": "filters for data in the a page",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "example": {
+              "categories": [
+                "general labor"
+              ],
+              "company_size": "10-20",
+              "company_type": "software"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/worker/companies/saved": {
+      "get": {
+        "tags": [
+          "User and Company"
+        ],
+        "summary": "Companies saved",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "type": "integer",
+            "name": "page",
+            "description": "page number to get",
+            "required": false
+          },
+          {
+            "in": "query",
+            "type": "integer",
+            "name": "limit",
+            "description": "limit for data in the a page",
+            "required": false
+          },
+          {
+            "in": "query",
+            "type": "integer",
+            "name": "get_type",
+            "description": "get_type top or all companies",
+            "required": false
+          },
+          {
+            "in": "query",
+            "type": "object",
+            "name": "filters",
+            "description": "filters for data in the a page",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "example": {
+              "categories": [
+                "general labor"
+              ],
+              "company_size": "10-20",
+              "company_type": "software"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/companies/{company_id}": {
+      "get": {
+        "tags": [
+          "User and Company"
+        ],
+        "summary": "Companies detail end point",
+        "parameters": [
+          {
+            "in": "header",
+            "type": "string",
+            "name": "CLIENT-AUTH",
+            "description": "client authorization token",
+            "required": true
+          },
+          {
+            "in": "path",
+            "type": "string",
+            "name": "company_id",
+            "description": "company id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/companies/{company_id}/jobs": {
+      "get": {
+        "tags": [
+          "User and Company and job"
+        ],
+        "summary": "Company jobs",
+        "parameters": [
+          {
+            "in": "header",
+            "type": "string",
+            "name": "CLIENT-AUTH",
+            "description": "client authorization token",
+            "required": true
+          },
+          {
+            "in": "path",
+            "type": "string",
+            "name": "company_id",
+            "description": "company id"
+          },
+          {
+            "in": "query",
+            "type": "integer",
+            "name": "page",
+            "description": "page number to get",
+            "required": false
+          },
+          {
+            "in": "query",
+            "type": "integer",
+            "name": "limit",
+            "description": "limit for data in the a page",
+            "required": false
+          },
+          {
+            "in": "query",
+            "type": "string",
+            "name": "category",
+            "description": "category filter for data in the a page",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/worker/profile-info": {
+      "get": {
+        "tags": [
+          "Worker"
+        ],
+        "summary": "get user detail",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/worker/follow-update/{user_id}/{status}": {
+      "get": {
+        "tags": [
+          "Worker"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "type": "string",
+            "name": "user_id",
+            "description": "user id to follow unfollow or ignore",
+            "required": true
+          },
+          {
+            "in": "path",
+            "type": "string",
+            "name": "status",
+            "description": "status in one of the[ignored, accepted, follow, unfollow]",
+            "required": true
+          }
+        ],
+        "summary": "follow , unfollow, ignore user via this end point",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/worker/follows/{status}": {
+      "get": {
+        "tags": [
+          "Worker"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "type": "string",
+            "name": "status",
+            "description": "status in one of the[requested, accepted]",
+            "required": true
+          }
+        ],
+        "summary": "get user detail",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/worker/get-user-suggestions": {
+      "get": {
+        "tags": [
+          "Worker"
+        ],
+        "summary": "get user suggestions for the user",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/worker/apply-job/{job_id}": {
+      "get": {
+        "tags": [
+          "Worker and Job"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "type": "string",
+            "name": "job_id",
+            "description": "job id"
+          }
+        ],
+        "summary": "apply for the job",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/worker/save-unsave-job/{job_id}": {
+      "get": {
+        "tags": [
+          "Worker and Job"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "type": "string",
+            "name": "job_id",
+            "description": "job id"
+          }
+        ],
+        "summary": "save job for future",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/worker/saved-jobs": {
+      "get": {
+        "tags": [
+          "Worker and Job"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "type": "integer",
+            "name": "page",
+            "description": "page number",
+            "required": false
+          },
+          {
+            "in": "query",
+            "type": "integer",
+            "name": "limit",
+            "description": "limit",
+            "required": false
+          },
+          {
+            "in": "query",
+            "type": "integer",
+            "name": "day_filter",
+            "description": "no. of days",
+            "required": false
+          },
+          {
+            "in": "query",
+            "type": "string",
+            "name": "filters",
+            "description": "title",
+            "required": false
+          }
+        ],
+        "summary": "saved jobs lists",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/worker/get-job/{job_id}": {
+      "get": {
+        "tags": [
+          "Worker and Job"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "type": "string",
+            "name": "job_id",
+            "description": "job id",
+            "required": true
+          }
+        ],
+        "summary": "get job detail from worker",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/worker/get-job-suggestions": {
+      "get": {
+        "tags": [
+          "Worker and Job"
+        ],
+        "summary": "get job suggestions for worker",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/worker/search/{name}": {
+      "get": {
+        "tags": [
+          "Worker and Job"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "type": "string",
+            "name": "name",
+            "description": "user, job, company"
+          }
+        ],
+        "summary": "search user, job or company",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/worker/add-post": {
+      "post": {
+        "tags": [
+          "Worker and Post"
+        ],
+        "summary": "add post of a user",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/post"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/worker/get-posts": {
+      "get": {
+        "tags": [
+          "Worker and Post"
+        ],
+        "summary": "get post for the worker",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/deletePost/{post_id}": {
+      "delete": {
+        "tags": [
+          "Admin and Post"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "type": "string",
+            "name": "post_id",
+            "description": "post_id",
+            "required": true
+          }
+        ],
+        "summary": "delete post by admin",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Post deleted successfully"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/deleteComment/{comment_id}": {
+      "delete": {
+        "tags": [
+          "Admin and Comment"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "type": "string",
+            "name": "comment_id",
+            "description": "comment_id",
+            "required": true
+          }
+        ],
+        "summary": "delete comment by admin",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Comment deleted successfully"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/worker/post/{post_id}": {
+      "delete": {
+        "tags": [
+          "Worker and Post"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "type": "string",
+            "name": "post_id",
+            "description": "job id",
+            "required": true
+          }
+        ],
+        "summary": "delete post for the worker",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Worker and Post"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "type": "string",
+            "name": "post_id",
+            "description": "job id",
+            "required": true
+          }
+        ],
+        "summary": "get post for the worker",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/worker/post/{post_id}/like-unlike": {
+      "get": {
+        "tags": [
+          "Worker and Post"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "type": "string",
+            "name": "post_id",
+            "description": "job id",
+            "required": true
+          }
+        ],
+        "summary": "like unlike post for the worker",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/worker/post/{post_id}/comment": {
+      "post": {
+        "tags": [
+          "Worker and Post"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "type": "string",
+            "name": "post_id",
+            "description": "job id",
+            "required": true
+          }
+        ],
+        "summary": "like unlike post for the worker",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/comment"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/worker/add-remove-favourite-job/{job_id}": {
+      "get": {
+        "tags": [
+          "Worker and Job"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "type": "string",
+            "name": "job_id",
+            "description": "job id"
+          }
+        ],
+        "summary": "apply for the job",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/worker/dashboard/data-counts": {
+      "get": {
+        "tags": [
+          "Worker and Dashboard"
+        ],
+        "summary": "get dashboard data from this end point for employer",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/worker/applications": {
+      "get": {
+        "tags": [
+          "Worker and Applications"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "type": "integer",
+            "name": "page",
+            "description": "page number",
+            "required": false
+          },
+          {
+            "in": "query",
+            "type": "integer",
+            "name": "limit",
+            "description": "limit",
+            "required": false
+          },
+          {
+            "in": "query",
+            "type": "string",
+            "name": "phase",
+            "description": "phase of the application",
+            "required": false
+          },
+          {
+            "in": "query",
+            "type": "string",
+            "name": "title",
+            "description": "title of the job",
+            "required": false
+          }
+        ],
+        "summary": "get applications lists for worker",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/worker/update-profile-general": {
+      "put": {
+        "tags": [
+          "Worker"
+        ],
+        "summary": "Updates the profile of a worker end point",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/updateProfileGeneral"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/worker/update-profile-trade": {
+      "put": {
+        "tags": [
+          "Worker"
+        ],
+        "summary": "Updates the profile of a worker end point",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/updateProfileTrade"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/worker/update-profile-work": {
+      "put": {
+        "tags": [
+          "Worker"
+        ],
+        "summary": "Updates the profile of a worker end point",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/updateProfileWork"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/worker/update-profile-cert": {
+      "put": {
+        "tags": [
+          "Worker"
+        ],
+        "summary": "Updates the profile of a worker end point",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/updateProfileCertificate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/worker/update-profile-work-pref": {
+      "put": {
+        "tags": [
+          "Worker"
+        ],
+        "summary": "Updates the profile of a worker end point",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/updateProfileWorkPreference"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/worker/companies/{query}": {
+      "get": {
+        "tags": [
+          "Worker and Company"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "type": "integer",
+            "name": "query",
+            "description": "search string query",
+            "required": true
+          }
+        ],
+        "summary": "company search from worker",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/worker/set-company-status/{company_id}/{status}": {
+      "get": {
+        "tags": [
+          "Worker and Company"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "type": "integer",
+            "name": "company_id",
+            "description": "company_id",
+            "required": true
+          },
+          {
+            "in": "path",
+            "type": "integer",
+            "name": "status",
+            "description": "status in [follow,save]",
+            "required": true
+          }
+        ],
+        "summary": "company search from worker",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/worker/get-companies/{status}": {
+      "get": {
+        "tags": [
+          "Worker and Company"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "type": "integer",
+            "name": "company_id",
+            "description": "company_id",
+            "required": true
+          },
+          {
+            "in": "path",
+            "type": "integer",
+            "name": "status",
+            "description": "status in [follow,save]",
+            "required": true
+          }
+        ],
+        "summary": "company search from worker",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/worker/get-company-suggestions": {
+      "get": {
+        "tags": [
+          "Worker and Company"
+        ],
+        "summary": "get list of suggested companies list",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/worker/save-unsave-company/{company_id}": {
+      "post": {
+        "tags": [
+          "Worker and Company"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "type": "string",
+            "name": "company_id",
+            "description": "company id"
+          }
+        ],
+        "summary": "save company for future",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/employer/get-profile-info": {
+      "get": {
+        "tags": [
+          "Employer"
+        ],
+        "summary": "get employer detail with its company detail",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/employer/like-Profile/:candidate_id": {
+      "post": {
+        "tags": [
+          "Employer"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "type": "string",
+            "name": "candidate_id",
+            "description": "candidate id"
+          }
+        ],
+        "summary": "like candidate profile",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/employer/unlike-Profile/:candidate_id": {
+      "post": {
+        "tags": [
+          "Employer"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "type": "string",
+            "name": "candidate_id",
+            "description": "candidate id"
+          }
+        ],
+        "summary": "Unlike candidate profile",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/employer/update-company": {
+      "put": {
+        "tags": [
+          "Employer and Company"
+        ],
+        "summary": "Company profile update end point",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/company"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/employer/update-company-detail": {
+      "put": {
+        "tags": [
+          "Employer and Company"
+        ],
+        "summary": "Company profile detail update end point",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/companyDetail"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/employer/create-job": {
+      "post": {
+        "tags": [
+          "Employer and Job"
+        ],
+        "summary": "Job create end point",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/job"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/employer/get-jobs": {
+      "get": {
+        "tags": [
+          "Employer and Job"
+        ],
+        "summary": "Job lists end point for employer",
+        "parameters": [
+          {
+            "in": "query",
+            "type": "integer",
+            "name": "page",
+            "description": "page number",
+            "required": false
+          },
+          {
+            "in": "query",
+            "type": "integer",
+            "name": "limit",
+            "description": "limit",
+            "required": false
+          },
+          {
+            "in": "query",
+            "type": "string",
+            "name": "phase",
+            "description": "in one of 'expired,draft,published' for job lists and for dashboard its empty",
+            "required": false
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/employer/jobs/:job_id": {
+      "get": {
+        "tags": [
+          "Employer and Job"
+        ],
+        "summary": "Job detail end point for employer",
+        "parameters": [
+          {
+            "in": "path",
+            "type": "string",
+            "name": "job_id",
+            "description": "job id",
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/employer/get-applied-jobs": {
+      "get": {
+        "tags": [
+          "Employer and Job"
+        ],
+        "summary": "Applied jobs lists end point for employer",
+        "parameters": [
+          {
+            "in": "query",
+            "type": "integer",
+            "name": "page",
+            "description": "page number",
+            "required": false
+          },
+          {
+            "in": "query",
+            "type": "integer",
+            "name": "limit",
+            "description": "limit",
+            "required": false
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/employer/job/{job_id}/candidates": {
+      "get": {
+        "tags": [
+          "Employer and Job"
+        ],
+        "summary": "candidate lists of a job end point for employer",
+        "parameters": [
+          {
+            "in": "path",
+            "type": "string",
+            "name": "job_id",
+            "description": "job_id",
+            "required": true
+          },
+          {
+            "in": "query",
+            "type": "string",
+            "name": "phase",
+            "description": "phase for the application of candidate",
+            "required": false
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/employer/job/{job_id}/applications": {
+      "get": {
+        "tags": [
+          "Employer and Job"
+        ],
+        "summary": "Applications lists of a job end point for employer",
+        "parameters": [
+          {
+            "in": "path",
+            "type": "string",
+            "name": "job_id",
+            "description": "job_id",
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/employer/activate-deactivate-job/{job_id}": {
+      "get": {
+        "tags": [
+          "Employer and Job"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "type": "string",
+            "name": "job_id",
+            "description": "job_id",
+            "required": true
+          }
+        ],
+        "summary": "job activate deactivate end point for employer",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/employer/search/{name}": {
+      "get": {
+        "tags": [
+          "Employer and Job"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "type": "string",
+            "name": "name",
+            "description": "user, job, company"
+          }
+        ],
+        "summary": "search user, job or company",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/employer/application/{application_id}/change-phase/{phase}": {
+      "get": {
+        "tags": [
+          "Employer and Application"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "type": "string",
+            "name": "application_id",
+            "description": "application_id",
+            "required": true
+          },
+          {
+            "in": "path",
+            "type": "string",
+            "name": "phase",
+            "description": "new phase",
+            "required": true
+          }
+        ],
+        "summary": "employer application phase change api end point",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/employer/dashboard/data-counts": {
+      "get": {
+        "tags": [
+          "Employer and Dashboard"
+        ],
+        "summary": "get dashboard data from this end point for employer",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/employer/dashboard/messages": {
+      "get": {
+        "tags": [
+          "Employer and Dashboard"
+        ],
+        "summary": "get dashboard messages data from this end point for employer",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/employer/dashboard/notifications": {
+      "get": {
+        "tags": [
+          "Employer and Dashboard"
+        ],
+        "summary": "get dashboard notifications from this end point for employer",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/employer/dashboard/jobs": {
+      "get": {
+        "tags": [
+          "Employer and Dashboard"
+        ],
+        "summary": "get dashboard jobs from this end point for employer",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/employer/dashboard/upcoming-interviews": {
+      "get": {
+        "tags": [
+          "Employer and Dashboard"
+        ],
+        "summary": "get dashboard upcoming interviews from this end point for employer",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/employer/add-team-member": {
+      "post": {
+        "tags": [
+          "Employer and Member"
+        ],
+        "summary": "add company team member end point",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/teamMember"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/employer/getTeamMembers": {
+      "get": {
+        "tags": [
+          "Employer and Member"
+        ],
+        "summary": "get team members",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/employer/getTeamMember/:member_id": {
+      "get": {
+        "tags": [
+          "Employer and Member"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "type": "string",
+            "name": "member_id",
+            "description": "member id"
+          }
+        ],
+        "summary": "get a particular team member",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/employer/get-user-suggestions": {
+      "get": {
+        "tags": [
+          "Employer and Member"
+        ],
+        "summary": "candidates list to invite for employer end point",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/dashboard/data-counts": {
+      "get": {
+        "tags": [
+          "Admin and Dashboard"
+        ],
+        "summary": "get dashboard data from this end point for employer",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/get-companies": {
+      "get": {
+        "tags": [
+          "Admin and Company"
+        ],
+        "summary": "get companies end point for admin",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/get-workers": {
+      "get": {
+        "tags": [
+          "Admin and Worker"
+        ],
+        "summary": "get workers end point for admin",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/conversations": {
+      "get": {
+        "tags": [
+          "Admin Panel Messaging tab"
+        ],
+        "summary": "get conversation b-b and b-w",
+        "parameters": [
+          {
+            "in": "query",
+            "type": "string",
+            "name": "name",
+            "description": "filter support conversation",
+            "required": false
+          },
+          {
+            "in": "query",
+            "type": "integer",
+            "limit": "limit",
+            "description": "limit conversation data",
+            "required": false
+          },
+          {
+            "in": "query",
+            "type": "integer",
+            "name": "page",
+            "description": "page number",
+            "required": false
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/conversation/{conversation_id}/messages": {
+      "get": {
+        "tags": [
+          "Admin Panel Messaging tab"
+        ],
+        "summary": "get conversation messages of b-b, b-w",
+        "parameters": [
+          {
+            "in": "path",
+            "type": "integer",
+            "name": "conversation_id",
+            "description": "conversation id string query",
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/send-message": {
+      "post": {
+        "tags": [
+          "Message"
+        ],
+        "summary": "send message via this end point",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/messages"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/conversations": {
+      "get": {
+        "tags": [
+          "Message"
+        ],
+        "summary": "get conversation of worker",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/conversation/{conversation_id}/messages": {
+      "get": {
+        "tags": [
+          "Message"
+        ],
+        "summary": "get conversation messages of worker",
+        "parameters": [
+          {
+            "in": "path",
+            "type": "integer",
+            "name": "conversation_id",
+            "description": "conversation id string query",
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/message/read": {
+      "get": {
+        "tags": [
+          "Message"
+        ],
+        "summary": "message set as read",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/readMessages"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Message set as read successfully"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/message/unread": {
+      "get": {
+        "tags": [
+          "Message"
+        ],
+        "summary": "message set as unread",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/readMessages"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Message set as unread successfully"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/default-certs": {
+      "get": {
+        "tags": [
+          "ProfileSelective"
+        ],
+        "summary": "profile selective certificates",
+        "parameters": [
+          {
+            "in": "header",
+            "type": "string",
+            "name": "CLIENT-AUTH",
+            "description": "client authorization token",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/default-exp-roles": {
+      "get": {
+        "tags": [
+          "ProfileSelective"
+        ],
+        "summary": "profile selective experience roles",
+        "parameters": [
+          {
+            "in": "header",
+            "type": "string",
+            "name": "CLIENT-AUTH",
+            "description": "client authorization token",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/default-pref-dev-type": {
+      "get": {
+        "tags": [
+          "ProfileSelective"
+        ],
+        "summary": "profile selective work preference development type",
+        "parameters": [
+          {
+            "in": "header",
+            "type": "string",
+            "name": "CLIENT-AUTH",
+            "description": "client authorization token",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/default-pref-benefits": {
+      "get": {
+        "tags": [
+          "ProfileSelective"
+        ],
+        "summary": "profile selective benefits",
+        "parameters": [
+          {
+            "in": "header",
+            "type": "string",
+            "name": "CLIENT-AUTH",
+            "description": "client authorization token",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/default-pref-job-type": {
+      "get": {
+        "tags": [
+          "ProfileSelective"
+        ],
+        "summary": "profile selective job-type",
+        "parameters": [
+          {
+            "in": "header",
+            "type": "string",
+            "name": "CLIENT-AUTH",
+            "description": "client authorization token",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/default-pref-company-size": {
+      "get": {
+        "tags": [
+          "ProfileSelective"
+        ],
+        "summary": "profile selective company size",
+        "parameters": [
+          {
+            "in": "header",
+            "type": "string",
+            "name": "CLIENT-AUTH",
+            "description": "client authorization token",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/states-and-cities": {
+      "get": {
+        "tags": [
+          "Locations"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "type": "string",
+            "name": "CLIENT-AUTH",
+            "description": "client authorization token",
+            "required": true
+          }
+        ],
+        "summary": "get country and their states and cities",
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/upload-file": {
+      "post": {
+        "tags": [
+          "File"
+        ],
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "summary": "upload file for file_for = profile_image,cover_image,post, also include key value for files",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/fileUpload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/employer/get-permissions": {
+      "get": {
+        "tags": [
+          "Permission"
+        ],
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "summary": "get permissions for employer",
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/get-permissions": {
+      "get": {
+        "tags": [
+          "Permission"
+        ],
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "summary": "get permission list for admin",
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/support/send-message": {
+      "post": {
+        "tags": [
+          "Support Tab"
+        ],
+        "summary": "send support message",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/messages"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/support/conversations": {
+      "get": {
+        "tags": [
+          "Support Tab"
+        ],
+        "summary": "get support conversation",
+        "parameters": [
+          {
+            "in": "query",
+            "type": "string",
+            "name": "name",
+            "description": "filter support conversation",
+            "required": false
+          },
+          {
+            "in": "query",
+            "type": "integer",
+            "name": "limit",
+            "description": "limit conversation data",
+            "required": false
+          },
+          {
+            "in": "query",
+            "type": "integer",
+            "name": "page",
+            "description": "page number",
+            "required": false
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/ticket/resolve": {
+      "post": {
+        "tags": [
+          "Support Tab"
+        ],
+        "summary": "get support conversation",
+        "parameters": [
+          {
+            "in": "query",
+            "type": "string",
+            "name": "conversation_id",
+            "description": "conversation_id",
+            "required": false
+          },
+          {
+            "in": "query",
+            "type": "integer",
+            "name": "status",
+            "description": "resolved/open",
+            "required": false
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/employer/subscription/getSubscribed/{subscription_id}": {
+      "post": {
+        "tags": [
+          "Employer Subscription"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "type": "string",
+            "name": "subscription_id",
+            "description": "subscription plan id"
+          }
+        ],
+        "summary": "subscribe to a plan",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/employer/subscription/paySubscription/{subscription_id}": {
+      "post": {
+        "tags": [
+          "Employer Subscription"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "type": "string",
+            "name": "subscription_id",
+            "description": "subscription plan id"
+          }
+        ],
+        "summary": "Pay for subscription plan",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/cardDetail"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/employer/subscription/verifyPayment/{session_id}": {
+      "get": {
+        "tags": [
+          "Employer Subscription"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "type": "string",
+            "name": "session_id",
+            "description": "session_id id"
+          }
+        ],
+        "summary": "verify subscription plan",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/employer/subscription/currentPlan": {
+      "get": {
+        "tags": [
+          "Employer Subscription"
+        ],
+        "summary": "get current subscription plan and history",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/employer/subscription/getPlan": {
+      "get": {
+        "tags": [
+          "Employer Subscription"
+        ],
+        "summary": "get subscription plan",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/employer/subscription/getPlan/{plan_id}": {
+      "get": {
+        "tags": [
+          "Employer Subscription"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "type": "string",
+            "name": "plan_id",
+            "description": "subscription plan id"
+          }
+        ],
+        "summary": "get particular subscription plan",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/dashboard/user-engagements-counts": {
+      "get": {
+        "tags": [
+          "To-do"
+        ],
+        "summary": "get dashboard data user engagement from this end point for employer",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/dashboard/employer-engagements-counts": {
+      "get": {
+        "tags": [
+          "To-do"
+        ],
+        "summary": "get dashboard employer engagement data from this end point for employer",
+        "security": [
+          {
+            "bearerAuth": {
+              "$ref": "#/components/securitySchemes/bearerAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successfully executed"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Request not found"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "adminSignUp": {
+        "type": "object",
+        "properties": {
+          "first_name": {
+            "type": "string"
+          },
+          "last_name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ]
+      },
+      "signUp": {
+        "type": "object",
+        "properties": {
+          "company_name": {
+            "type": "string",
+            "description": "required for employer role"
+          },
+          "first_name": {
+            "type": "string",
+            "description": "required for worker role"
+          },
+          "last_name": {
+            "type": "string",
+            "description": "required for worker role"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "password",
+          "role"
+        ]
+      },
+      "signIn": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ]
+      },
+      "google(signIn)": {
+        "type": "object",
+        "properties": {
+          "profile_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "profile_id"
+        ]
+      },
+      "google(signUp)": {
+        "type": "object",
+        "properties": {
+          "first_name": {
+            "type": "string"
+          },
+          "last_name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "profile_id": {
+            "type": "string"
+          },
+          "profile_image": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "first_name",
+          "last_name",
+          "profile_id"
+        ]
+      },
+      "forgotPassword": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "email"
+        ]
+      },
+      "changePassword": {
+        "type": "object",
+        "properties": {
+          "authorization": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "authorization",
+          "password"
+        ]
+      },
+      "settingChangePassword": {
+        "type": "object",
+        "properties": {
+          "old_password": {
+            "type": "string"
+          },
+          "new_password": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "old_password",
+          "new_password"
+        ]
+      },
+      "category": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "skills": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "title",
+          "skills"
+        ]
+      },
+      "WorkTime": {
+        "type": "object",
+        "properties": {
+          "start": {
+            "type": "string"
+          },
+          "end": {
+            "type": "string"
+          },
+          "off": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "start",
+          "end",
+          "off"
+        ]
+      },
+      "job": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "responsibilities": {
+            "type": "string"
+          },
+          "working_schedule": {
+            "type": "object",
+            "properties": {
+              "sunday": {
+                "$ref": "#/components/schemas/WorkTime"
+              },
+              "monday": {
+                "$ref": "#/components/schemas/WorkTime"
+              },
+              "tuesday": {
+                "$ref": "#/components/schemas/WorkTime"
+              },
+              "wednesday": {
+                "$ref": "#/components/schemas/WorkTime"
+              },
+              "thursday": {
+                "$ref": "#/components/schemas/WorkTime"
+              },
+              "friday": {
+                "$ref": "#/components/schemas/WorkTime"
+              },
+              "saturday": {
+                "$ref": "#/components/schemas/WorkTime"
+              }
+            },
+            "required": [
+              "sunday",
+              "monday",
+              "tuesday",
+              "wednesday",
+              "thursday",
+              "friday",
+              "saturday"
+            ]
+          },
+          "job_type": {
+            "type": "string"
+          },
+          "job_role": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "pay_rate": {
+            "type": "object",
+            "properties": {
+              "min": {
+                "type": "integer"
+              },
+              "max": {
+                "type": "integer"
+              },
+              "pay_type": {
+                "type": "string"
+              }
+            }
+          },
+          "benefits": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "certificates": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "skills": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "desired_experience": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "title",
+                "skills",
+                "desired_experience"
+              ]
+            }
+          },
+          "address": {
+            "type": "object",
+            "properties": {
+              "city": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "required": [
+          "title",
+          "categories",
+          "address",
+          "job_type",
+          "summary",
+          "pay_rate"
+        ]
+      },
+      "company": {
+        "type": "object",
+        "properties": {
+          "company_name": {
+            "type": "string"
+          },
+          "first_name": {
+            "type": "string"
+          },
+          "last_name": {
+            "type": "string"
+          },
+          "year_founded": {
+            "type": "string"
+          },
+          "company_size": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "company_type": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "working_schedule": {
+            "type": "object",
+            "properties": {
+              "sunday": {
+                "$ref": "#/components/schemas/WorkTime"
+              },
+              "monday": {
+                "$ref": "#/components/schemas/WorkTime"
+              },
+              "tuesday": {
+                "$ref": "#/components/schemas/WorkTime"
+              },
+              "wednesday": {
+                "$ref": "#/components/schemas/WorkTime"
+              },
+              "thursday": {
+                "$ref": "#/components/schemas/WorkTime"
+              },
+              "friday": {
+                "$ref": "#/components/schemas/WorkTime"
+              },
+              "saturday": {
+                "$ref": "#/components/schemas/WorkTime"
+              }
+            },
+            "required": [
+              "sunday",
+              "monday",
+              "tuesday",
+              "wednesday",
+              "thursday",
+              "friday",
+              "saturday"
+            ]
+          },
+          "overview": {
+            "type": "string"
+          },
+          "address": {
+            "type": "object",
+            "properties": {
+              "city": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              },
+              "state": {
+                "type": "string"
+              }
+            }
+          },
+          "website": {
+            "type": "string"
+          },
+          "position": {
+            "type": "string"
+          },
+          "license_number": {
+            "type": "string"
+          },
+          "phone_number": {
+            "type": "string"
+          },
+          "profile_image": {
+            "type": "string"
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "skills": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "title"
+              ]
+            }
+          }
+        },
+        "required": [
+          "company_type",
+          "first_name",
+          "last_name",
+          "phone_number",
+          "position"
+        ]
+      },
+      "updateProfileGeneral": {
+        "type": "object",
+        "properties": {
+          "profile_image": {
+            "type": "string",
+            "format": "binary"
+          },
+          "address": {
+            "type": "object",
+            "properties": {
+              "country": {
+                "type": "string"
+              },
+              "state": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              }
+            }
+          },
+          "travel_will": {
+            "type": "object",
+            "properties": {
+              "distance": {
+                "type": "integer"
+              },
+              "high_demand_city": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "required": [
+          "address",
+          "categories",
+          "work_experience",
+          "travel_will"
+        ]
+      },
+      "updateProfileTrade": {
+        "type": "object",
+        "properties": {
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "experience_time": {
+                  "type": "integer"
+                },
+                "skills": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "is_primary": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        },
+        "required": [
+          "address",
+          "categories",
+          "work_experience",
+          "travel_will"
+        ]
+      },
+      "updateProfileWork": {
+        "type": "object",
+        "properties": {
+          "work_experience": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "company_name": {
+                  "type": "string"
+                },
+                "role": {
+                  "type": "string"
+                },
+                "company_id": {
+                  "type": "string"
+                },
+                "from": {
+                  "type": "object",
+                  "properties": {
+                    "year": {
+                      "type": "integer"
+                    },
+                    "month": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "to": {
+                  "type": "object",
+                  "properties": {
+                    "year": {
+                      "type": "integer"
+                    },
+                    "month": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "description": {
+                  "type": "string"
+                },
+                "currently_work": {
+                  "type": "boolean"
+                },
+                "categories": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "other_worked_category": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        },
+        "required": [
+          "address",
+          "categories",
+          "work_experience",
+          "travel_will"
+        ]
+      },
+      "updateProfileCertificate": {
+        "type": "object",
+        "properties": {
+          "certificates": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "address",
+          "categories",
+          "work_experience",
+          "travel_will"
+        ]
+      },
+      "updateProfileWorkPreference": {
+        "type": "object",
+        "properties": {
+          "work_preferences": {
+            "type": "object",
+            "properties": {
+              "benefits": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "job_type": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "company_size": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "development_type": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "required": []
+      },
+      "fileUpload": {
+        "type": "object",
+        "properties": {
+          "file_for": {
+            "type": "string"
+          },
+          "files": {
+            "type": "string",
+            "format": "binary"
+          }
+        },
+        "required": [
+          "file_for",
+          "files"
+        ]
+      },
+      "post": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "message": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "conversation_id": {
+            "type": "string"
+          },
+          "receiver_id": {
+            "type": "string"
+          },
+          "job_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "receiver_id",
+          "message"
+        ]
+      },
+      "readMessages": {
+        "type": "object",
+        "properties": {
+          "message_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message_id"
+        ]
+      },
+      "comment": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "teamMember": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "first_name": {
+            "type": "string"
+          },
+          "last_name": {
+            "type": "string"
+          },
+          "home": {
+            "type": "boolean"
+          },
+          "view_edit_jobs": {
+            "type": "boolean"
+          },
+          "manage_candidates": {
+            "type": "boolean"
+          },
+          "post_new_job": {
+            "type": "boolean"
+          },
+          "post_jobs": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "boolean"
+          },
+          "calander": {
+            "type": "boolean"
+          },
+          "sub_contractor": {
+            "type": "boolean"
+          },
+          "company_settings": {
+            "type": "boolean"
+          },
+          "add_remove_staff": {
+            "type": "boolean"
+          },
+          "manage_subscription": {
+            "type": "boolean"
+          },
+          "view_update_billing": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "email",
+          "first_name",
+          "last_name"
+        ]
+      },
+      "companyDetail": {
+        "type": "object",
+        "properties": {
+          "company_name": {
+            "type": "string"
+          },
+          "phone_number": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "website": {
+            "type": "string"
+          },
+          "year_founded": {
+            "type": "string"
+          },
+          "license_number": {
+            "type": "string"
+          },
+          "company_size": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "working_schedule": {
+            "type": "object",
+            "properties": {
+              "sunday": {
+                "$ref": "#/components/schemas/WorkTime"
+              },
+              "monday": {
+                "$ref": "#/components/schemas/WorkTime"
+              },
+              "tuesday": {
+                "$ref": "#/components/schemas/WorkTime"
+              },
+              "wednesday": {
+                "$ref": "#/components/schemas/WorkTime"
+              },
+              "thursday": {
+                "$ref": "#/components/schemas/WorkTime"
+              },
+              "friday": {
+                "$ref": "#/components/schemas/WorkTime"
+              },
+              "saturday": {
+                "$ref": "#/components/schemas/WorkTime"
+              }
+            },
+            "required": [
+              "sunday",
+              "monday",
+              "tuesday",
+              "wednesday",
+              "thursday",
+              "friday",
+              "saturday"
+            ]
+          },
+          "overview": {
+            "type": "string"
+          },
+          "address": {
+            "type": "object",
+            "properties": {
+              "city": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              },
+              "state": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "required": [
+          "message",
+          "company_name",
+          "email",
+          "phone_number",
+          "working_schedule"
+        ]
+      },
+      "cardDetail": {
+        "type": "object",
+        "properties": {
+          "card_number": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "expires_at": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ]
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "responses": {
+      "UnauthorizedError": {
+        "description": "Access token is missing or invalid"
+      }
+    }
+  }
+}

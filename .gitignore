@@ -1,0 +1,10 @@
+node_modules
+config
+.env
+public/profiles/*
+public/comapny/*
+!public/profiles/.gitkeep
+!public/company/.gitkeep
+package-lock.json
+yarn.lock
+deploy.sh
